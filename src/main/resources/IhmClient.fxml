@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controllers.ClientController"
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background-color: #f0f8ff;">
+
+    <children>
+        <VBox spacing="20" alignment="CENTER" layoutX="200.0" layoutY="50.0">
+            <Label text="Espace Client" style="-fx-font-size: 24px; -fx-text-fill: #2a2a2a;" />
+
+            <Button text="Consulter Produits"
+                    prefWidth="300"
+                    onAction="#handleConsulterProduits"
+                    style="-fx-background-color: #007BFF; -fx-text-fill: white; -fx-font-size: 14px;" />
+
+            <Button text="Rechercher un Produit"
+                    prefWidth="300"
+                    onAction="#handleRechercherProduit"
+                    style="-fx-background-color: #6C757D; -fx-text-fill: white; -fx-font-size: 14px;" />
+
+            <Button text="Gérer Panier"
+                    prefWidth="300"
+                    onAction="#handleGererPanier"
+                    style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-size: 14px;" />
+
+            <Button text="Passer une Commande"
+                    prefWidth="300"
+                    onAction="#handlePasserCommande"
+                    style="-fx-background-color: #17A2B8; -fx-text-fill: white; -fx-font-size: 14px;" />
+
+            <Button text="Consulter Commandes"
+                    prefWidth="300"
+                    onAction="#handleConsulterCommandes"
+                    style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-font-size: 14px;" />
+
+            <Button text="Se Déconnecter"
+                    prefWidth="300"
+                    onAction="#handleDeconnexion"
+                    style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-font-size: 14px;" />
+        </VBox>
+    </children>
+</AnchorPane>
