@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="489.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GestionCommandeController">
+    <children>
+        <!-- Titre -->
+        <Label layoutX="20" layoutY="20" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Gestion des Commandes" />
+
+        <!-- Formulaire pour gérer les produits -->
+        <VBox layoutX="20" layoutY="60" prefWidth="400" spacing="10">
+            <!-- Ajouter produit -->
+            <HBox spacing="10">
+                <TextField fx:id="referenceProduitField" prefWidth="150" promptText="Référence Produit" />
+                <TextField fx:id="quantiteField" prefWidth="100" promptText="Quantité" />
+                <Button onAction="#ajouterProduit" text="Ajouter Produit" />
+            </HBox>
+
+            <!-- Supprimer produit -->
+            <HBox spacing="10">
+                <TextField fx:id="txtReferenceProduitDelete" prefWidth="250" promptText="Référence Produit à Supprimer" />
+                <Button onAction="#supprimerProduitCommande" text="Supprimer Produit" />
+            </HBox>
+
+            <!-- Modifier quantité produit -->
+            <HBox spacing="10">
+                <TextField fx:id="txtReferenceProduitUpdate" prefWidth="150" promptText="Référence Produit à Modifier" />
+                <TextField fx:id="txtQuantiteUpdate" prefWidth="100" promptText="Nouvelle Quantité" />
+                <Button onAction="#modifierQuantiteCommande" text="Modifier Quantité" />
+            </HBox>
+        </VBox>
+
+        <!-- Liste des produits dans la commande -->
+        <TableView fx:id="tableProduitsCommande" layoutX="20.0" layoutY="213.0" prefHeight="200" prefWidth="322.0">
+            <columns>
+                <TableColumn fx:id="colNomProduit" text="Nom Produit" />
+                <TableColumn fx:id="colQuantiteProduit" text="Quantité" />
+                <TableColumn fx:id="colPrixUnitaireProduit" text="Prix Unitaire " />
+                <TableColumn fx:id="colPrixTotalProduit" text="Prix Total" />
+            </columns>
+        </TableView>
+
+
+        <!-- Actions sur la commande -->
+        <HBox layoutX="20" layoutY="400" spacing="10" />
+        <Label fx:id="montantTotalLabel" layoutX="355" layoutY="395" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+         <Button fx:id="btnSupprimerCommande" layoutX="175.0" layoutY="429.0" onAction="#supprimerCommande" text="Supprimer Commande" />
+         <Button fx:id="btnAjouterCommande" layoutX="43.0" layoutY="429.0" onAction="#validerCommande" text="Valider Commande" />
+    </children>
+</AnchorPane>

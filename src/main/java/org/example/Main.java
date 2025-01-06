@@ -1,73 +1,99 @@
 package org.example;
 
 import ConnectionDB.DataBaseConnection;
-import entités.*;
+import entités.Produit;
+import entités.Vetements;
+import entités.Accessoires;
+import Service.ServiceProduit;
 
-import java.sql.*;
-
-import Service.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
     public static void main(String[] args) {
-
-       // DataBaseConnection dataBaseConnection = new DataBaseConnection();
+        // Connexion à la base de données
         Connection con = DataBaseConnection.getInstance().getConnection();
-        System.out.println(con);
+        System.out.println("Database connection: " + con);
 
+        // Créer une instance de ServiceProduit
+        ServiceProduit serviceProduit = new ServiceProduit();
 
-//        DataBaseConnection data1=DataBaseConnection.getInstance();
-//
-//        DataBaseConnection data2=DataBaseConnection.getInstance();
-//
-//        System.out.println(data1);
-//        System.out.println(data2);
-//
-//        Connection con=DataBaseConnection.getInstance().getCon();
-//        Client client = new Client(12, "nouha123",                // nomClient
-//                "Ben",                  // prenomClient
-//                 "987654321",
-//                "nouha.ben@example.com",// emailClient
-//                "123 Rue de Tunis",     // adresse
-//                "nouha123",             // userName
-//                "password123",          // password
-//                "2024-11-30"            // dateCreationCompte
-//        );
-//        ServiceClient serviceClient = new ServiceClient();
+        // Test pour l'entité Vetements
+        Vetements vetement = new Vetements(
+                "REF009",                    // Référence
+                "T-shirt",                  // Nom
+                "T-shirt en coton bio",     // Description
+                25.99,                      // Prix
+                50,                         // Stock
+                "Vêtements",                // Catégorie
+                "Homme",                    // Sous-catégorie
+                "L",                        // Taille
+                "Bleu"                      // Couleur
+        );
+
+        // Test pour l'entité Accessoires
+        Accessoires accessoire = new Accessoires(
+                "REF007",                    // Référence
+                "Montre",                   // Nom
+                "Montre en acier inoxydable", // Description
+                199.99,                     // Prix
+                20,                         // Stock
+                "Accessoires",              // Catégorie
+                "Montres",                  // Sous-catégorie
+                "Noir",                     // Couleur
+                "Métal"                     // Matière
+        );
+
+        // Ajouter le Vetement
+        try {
+            serviceProduit.ajouter(vetement);
+            System.out.println("Vetement ajouté avec succès !");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'ajout du vetement : " + e.getMessage());
+        }
+
+        // Ajouter l'Accessoire
+        try {
+            serviceProduit.ajouter(accessoire);
+            System.out.println("Accessoire ajouté avec succès !");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'ajout de l'accessoire : " + e.getMessage());
+        }
+
+        // Récupérer tous les produits
+        try {
+            List<Produit> produits = serviceProduit.getAll();
+            System.out.println("Liste des produits : " + produits);
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des produits : " + e.getMessage());
+        }
+
+        // Mettre à jour le Vetement
+        vetement.setPrix(29.99); // Modifier le prix
+        vetement.setStock(45);  // Mettre à jour le stock
+        try {
+            serviceProduit.update(vetement);
+            System.out.println("Vetement mis à jour avec succès !");
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la mise à jour du vetement : " + e.getMessage());
+        }
+
+        // Récupérer un produit spécifique par référence
+        try {
+            Produit fetchedProduit = serviceProduit.getById("REF002"); // Utilisez REF002 ici pour tester
+            System.out.println("Produit récupéré : " + fetchedProduit);
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération du produit : " + e.getMessage());
+        }
+
+//        // Optionnel : Supprimer l'Accessoire
+//        // Vous pouvez décommenter cette partie si vous souhaitez tester la suppression.
 //        try {
-//            serviceClient.ajouter(client);
+//            serviceProduit.supprimer(accessoire);
+//            System.out.println("Accessoire supprimé avec succès !");
 //        } catch (SQLException e) {
-//            System.out.println(e);
+//            System.out.println("Erreur lors de la suppression de l'accessoire : " + e.getMessage());
 //        }
-//
-//        try {
-//            serviceClient.supprimer(client);
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        try {
-//            List <Client> clients =serviceClient.getAll();
-//            System.out.println(clients);
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-
-
-        ServiceLogin serviceLogin = new ServiceLogin();
-
-        String username = "nouha123";
-        String password = "password123";
-
-//        try {
-//            boolean isLoggedIn = serviceLogin.login(username, password);
-//            if (!isLoggedIn) {
-//                System.out.println("La connexion a échoué.");
-//            }
-//            System.out.println("Login Ok .");
-//        } catch (SQLException e) {
-//            System.out.println("Erreur lors de la tentative de connexion : " + e.getMessage());
-//        }
-
     }
 }

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Pos?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.paint.Color?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.GestionCommandeController">
+    <children>
+        <!-- Menu Bar -->
+        <MenuBar AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" style="-fx-background-color: #5A5A5A;">
+            <menus>
+                <Menu text="Commande" style="-fx-text-fill: white;">
+                    <items>
+                        <MenuItem text="Ajouter Produit à Commande" onAction="#ajouterProduitCommande" style="-fx-text-fill: #1F8E3F;"/>
+                        <MenuItem text="Mettre à jour Quantité" onAction="#modifierQuantiteCommande" style="-fx-text-fill: #1F8E3F;"/>
+                        <MenuItem text="Supprimer Produit de Commande" onAction="#supprimerProduitCommande" style="-fx-text-fill: #1F8E3F;"/>
+                        <MenuItem text="Valider Commande" onAction="#validerCommande" style="-fx-text-fill: #1F8E3F;"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+
+        <!-- Titre -->
+        <Label layoutX="250.0" layoutY="60.0"
+               prefHeight="35.0" prefWidth="332.0"
+               text="Gestion des Commandes" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+
+        <!-- Liste des Produits dans la Commande -->
+        <TableView fx:id="tableProduitsCommande" layoutX="50.0" layoutY="120.0" prefHeight="250.0" prefWidth="700.0" style="-fx-border-color: #cccccc; -fx-border-width: 1px;">
+            <columns>
+                <TableColumn fx:id="colNomProduit" text="Nom Produit" prefWidth="200"/>
+                <TableColumn fx:id="colQuantiteProduit" text="Quantité" prefWidth="150"/>
+                <TableColumn fx:id="colPrixUnitaireProduit" text="Prix Unitaire" prefWidth="150"/>
+                <TableColumn fx:id="colPrixTotalProduit" text="Prix Total" prefWidth="150"/>
+            </columns>
+        </TableView>
+
+        <!-- Section Ajouter Produit à Commande -->
+        <VBox fx:id="addProduitCommande" spacing="15" alignment="CENTER" layoutX="50.0" layoutY="380.0" visible="false" style="-fx-background-color: #FAFAFA; -fx-padding: 15px; -fx-border-radius: 8px; -fx-border-color: #E0E0E0; -fx-border-width: 1px;">
+            <Label text="Référence Produit" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="txtReferenceProduitCommande" promptText="Référence Produit" prefWidth="200"/>
+
+            <Label text="Quantité" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="txtQuantiteProduitCommande" promptText="Quantité" prefWidth="200"/>
+
+            <Button text="Ajouter Produit" onAction="#ajouterProduitCommande" textFill="#ffffff" style="-fx-background-color: #1F8E3F; -fx-font-size: 14px; -fx-padding: 10px 20px; -fx-border-radius: 5px;"/>
+            <Button text="Annuler" onAction="#annuler" textFill="#ffffff" style="-fx-background-color: #E53935; -fx-font-size: 14px; -fx-padding: 10px 20px; -fx-border-radius: 5px;"/>
+        </VBox>
+
+        <!-- Section Mettre à Jour Quantité Produit -->
+        <VBox fx:id="updateQuantiteCommande" spacing="15" alignment="CENTER" layoutX="300.0" layoutY="380.0" visible="false" style="-fx-background-color: #FAFAFA; -fx-padding: 15px; -fx-border-radius: 8px; -fx-border-color: #E0E0E0; -fx-border-width: 1px;">
+            <Label text="Référence Produit" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="txtReferenceProduitUpdate" promptText="Référence Produit" prefWidth="200"/>
+
+            <Label text="Nouvelle Quantité" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="txtQuantiteUpdate" promptText="Nouvelle Quantité" prefWidth="200"/>
+
+            <Button text="Mettre à jour Quantité" onAction="#modifierQuantiteCommande" textFill="#ffffff" style="-fx-background-color: #1F8E3F; -fx-font-size: 14px; -fx-padding: 10px 20px; -fx-border-radius: 5px;"/>
+            <Button text="Annuler" onAction="#annuler" textFill="#ffffff" style="-fx-background-color: #E53935; -fx-font-size: 14px; -fx-padding: 10px 20px; -fx-border-radius: 5px;"/>
+        </VBox>
+
+        <!-- Section Supprimer Produit de Commande -->
+        <VBox fx:id="deleteProduitCommande" spacing="15" alignment="CENTER" layoutX="550.0" layoutY="380.0" visible="false" style="-fx-background-color: #FAFAFA; -fx-padding: 15px; -fx-border-radius: 8px; -fx-border-color: #E0E0E0; -fx-border-width: 1px;">
+            <Label text="Référence Produit à Supprimer" style="-fx-font-size: 14px;"/>
+            <TextField fx:id="txtReferenceProduitDelete" promptText="Référence Produit" prefWidth="200"/>
+
+            <Button text="Supprimer Produit" onAction="#supprimerProduitCommande" textFill="#ffffff" style="-fx-background-color: #1F8E3F; -fx-font-size: 14px; -fx-padding: 10px 20px; -fx-border-radius: 5px;"/>
+            <Button text="Annuler" onAction="#annuler" textFill="#ffffff" style="-fx-background-color: #E53935; -fx-font-size: 14px; -fx-padding: 10px 20px; -fx-border-radius: 5px;"/>
+        </VBox>
+
+        <!-- Bouton Valider la Commande -->
+        <Button text="Valider Commande" onAction="#validerCommande" layoutX="350.0" layoutY="470.0" prefWidth="150" style="-fx-background-color: #1F8E3F; -fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-border-radius: 5px;"/>
+    </children>
+</AnchorPane>

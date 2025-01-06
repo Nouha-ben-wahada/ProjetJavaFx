@@ -1,48 +1,43 @@
 package entités;
 
-public class Produit {
+import java.util.Objects;
 
-    private int refProduit;
-    private String designation;
+public class Produit {
+    private String reference;
+    private String nom;
     private String description;
     private double prix;
-    private String image;
-    private int qteStocke;
+    private int stock;
+    private String categorie;
+    private String sousCategorie;
 
-    public Produit() {
-    }
-
-    public Produit(int refProduit, String designation, String description, double prix, String image, int qteStocke) {
-        this.refProduit = refProduit;
-        this.designation = designation;
+    // Constructor for Produit class
+    public Produit(String reference, String nom, String description, double prix, int stock,
+                   String categorie, String sousCategorie) {
+        this.reference = reference;
+        this.nom = nom;
         this.description = description;
         this.prix = prix;
-        this.image = image;
-        this.qteStocke = qteStocke;
+        this.stock = stock;
+        this.categorie = categorie;
+        this.sousCategorie = sousCategorie;
     }
 
-    public int getQteStocke() {
-        return qteStocke;
+    // Getters and setters for Produit class fields
+    public String getReference() {
+        return reference;
     }
 
-    public void setQteStocke(int qteStocke) {
-        this.qteStocke = qteStocke;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
-    public String getImage() {
-        return image;
+    public String getNom() {
+        return nom;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(double prix) {
-        this.prix = prix;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getDescription() {
@@ -53,31 +48,54 @@ public class Produit {
         this.description = description;
     }
 
-    public String getDesignation() {
-        return designation;
+    public double getPrix() {
+        return prix;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public void setPrix(double prix) {
+        this.prix = prix;
     }
 
-    public int getRefProduit() {
-        return refProduit;
+    public int getStock() {
+        return stock;
     }
 
-    public void setRefProduit(int refProduit) {
-        this.refProduit = refProduit;
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
+
+    public String getSousCategorie() {
+        return sousCategorie;
+    }
+
+    public void setSousCategorie(String sousCategorie) {
+        this.sousCategorie = sousCategorie;
+    }
+
+
+
+
+    ///////////////////////////////////////////////////////
+    // Equals and hashCode
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Produit produit = (Produit) o;
+        return Objects.equals(reference, produit.reference);
     }
 
     @Override
-    public String toString() {
-        return "Produit{" +
-                "refProduit=" + refProduit +
-                ", designation='" + designation + '\'' +
-                ", description='" + description + '\'' +
-                ", prix=" + prix +
-                ", image='" + image + '\'' +
-                ", qteStocke=" + qteStocke +
-                '}';
+    public int hashCode() {
+        return Objects.hash(reference);
     }
+    /////////////////////////////////////////////////////////
 }

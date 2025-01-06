@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="314.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GestionlivraisonAdminController">
+    <children>
+        <!-- Titre -->
+        <Label layoutX="20" layoutY="20" text="Gestion de livraison Admin" />
+
+        <!-- Table des commandes -->
+        <Label layoutX="20" layoutY="60" text="Les Commandes pour livraison:" />
+        <TableView fx:id="tableCommandes" layoutX="20" layoutY="90" prefHeight="200" prefWidth="403.0">
+            <columns>
+                <TableColumn fx:id="colIdCommande" prefWidth="100" text="ID Commande" />
+                <TableColumn fx:id="colIdUser" prefWidth="84.79998016357422" text="ID User" />
+                <TableColumn fx:id="colMontantTotal" prefWidth="104.800048828125" text="Montant Total" />
+                <TableColumn fx:id="colEtatCommande" prefWidth="111.199951171875" text="État Commande" />
+            </columns>
+        </TableView>
+
+        <!-- Choix du livreur -->
+        <Label layoutX="450" layoutY="60" text="Choisir un livreur:" />
+        <ComboBox fx:id="comboLivreur" layoutX="450" layoutY="90" prefWidth="200" />
+
+        <!-- Choix du mode de livraison -->
+        <Label layoutX="450" layoutY="130" text="Mode de livraison:" />
+        <ComboBox fx:id="comboModeLivraison" layoutX="450" layoutY="160" prefWidth="200">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Livraison standard" />
+                    <String fx:value="Livraison express" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Bouton de validation -->
+        <HBox alignment="CENTER" layoutX="450" layoutY="200" spacing="10">
+            <Button fx:id="btnValiderCommande" onAction="#assignLivreurAndNotify" text="Envoyer mail" />
+        </HBox>
+
+        <!-- Message -->
+        <Label fx:id="labelMessage" layoutX="450" layoutY="250" textFill="red" />
+    </children>
+</AnchorPane>

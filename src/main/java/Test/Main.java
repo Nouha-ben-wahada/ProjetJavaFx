@@ -1,26 +1,33 @@
 package Test;
 
-import Controllers.CreateCompteController;
-import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import Controllers.GestionCommandeController;
+import Service.ServiceGestionCommande;
+import entités.Produit;
+import entités.GestionCommande;
 
-public class Main extends Application {
+public class Main {
+        public static void main(String[] args) {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+                GestionCommande commande = new GestionCommande(2); // Utilisateur avec ID 1
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader Loader = new FXMLLoader(getClass().getResource("/HomePage.fxml"));
-        Parent root = Loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.setTitle("Page d'accueil");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+                // Ajouter des produits directement depuis la base de données
+                ServiceGestionCommande service = new ServiceGestionCommande();
+                service.ajouterProduitDepuisBDD(commande, "REF001", 2);
+                service.sauvegarderCommandeDansBDD(commande);
+
+                // Afficher la commande
+                commande.afficherCommande();
+                System.out.println("Montant total : " + commande.getMontantTotal());
+
+                commande = new GestionCommande(2); // Utilisateur avec ID 1
+                GestionCommandeController CommandeController = new GestionCommandeController();
+                service.ajouterProduitDepuisBDD(commande, "REF123", 2);
+                CommandeController.initialize();
+                CommandeController.supprimerProduitDepuisCommande("REF123");
+                service.sauvegarderCommandeDansBDD(commande);
+
+                // Afficher la commande
+                commande.afficherCommande();
+                System.out.println("Montant total : " + commande.getMontantTotal());
+        }
 }

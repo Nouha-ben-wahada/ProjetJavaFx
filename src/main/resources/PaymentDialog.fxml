@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.PaymentDialogController">
+    <children>
+        <!-- Title -->
+        <Label layoutX="200.0" layoutY="30.0" text="Choisir Mode de Paiement" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+        <!-- Payment Methods List -->
+        <ComboBox fx:id="paymentMethodComboBox" layoutX="150.0" layoutY="100.0" prefWidth="300.0">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Carte de Crédit"/>
+                    <String fx:value="Paiement à la Livraison"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Confirm Button -->
+        <Button text="Confirmer" onAction="#confirmerPaiement" layoutX="250.0" layoutY="200.0" prefWidth="100" style="-fx-background-color: #1F8E3F; -fx-font-size: 14px; -fx-text-fill: white;"/>
+
+        <!-- Cancel Button -->
+        <Button text="Annuler" onAction="#annulerPaiement" layoutX="250.0" layoutY="250.0" prefWidth="100" style="-fx-background-color: #E53935; -fx-font-size: 14px; -fx-text-fill: white;"/>
+    </children>
+</AnchorPane>
