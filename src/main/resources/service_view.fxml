@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="689.0" prefWidth="719.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ServiceController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+    </padding>
+
+    <!-- Titre -->
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Gestion des Services" textFill="#045bf2" />
+
+    <!-- Formulaire de service -->
+    <VBox spacing="8">
+        <!-- Champ ID Service (non modifiable, uniquement affiché) -->
+        <Label text="ID du Service:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+        <TextField fx:id="idServiceField" promptText="Entrez l'ID du service" />
+
+        <Label text="Nom du Service:">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Label>
+        <TextField fx:id="nomServiceField" promptText="Entrez le nom du service" />
+
+        <Label text="Catégorie:">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Label>
+        <ComboBox fx:id="categorieComboBox">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="COIFFURE" />
+                    <String fx:value="MAQUILLAGE" />
+                    <String fx:value="SOINS_DE_VISAGE" />
+                    <String fx:value="MASSAGES" />
+                    <String fx:value="POSE_DE_VERNIS" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Durée (en heures):">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Label>
+        <TextField fx:id="durationField" promptText="Entrez la durée" />
+
+        <Label text="Prix (en DT) :">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Label>
+        <TextField fx:id="prixField" promptText="Entrez le prix" />
+
+        <Label text="Description:">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Label>
+        <TextField fx:id="descriptionField" promptText="Entrez la description" />
+    </VBox>
+
+    <!-- Boutons -->
+    <HBox alignment="CENTER" spacing="10">
+        <Button onAction="#ajouterService" style="-fx-background-color: lightblue;" text="Ajouter">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+        <Button fx:id="updateButton" onAction="#updateService" style="-fx-background-color: lightgreen;" text="Mettre à jour" >
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font></Button>
+        <Button onAction="#supprimerService" style="-fx-background-color: lightpink;" text="Supprimer" >
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+        <Button onAction="#afficherTousLesServices" style="-fx-background-color: lightgrey;" text="Afficher les Services disponibles" >
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font></Button>
+    </HBox>
+
+    <HBox alignment="CENTER" spacing="10">
+        <!-- Liste des services -->
+        <!--ListView fx:id="serviceListView" prefHeight="200" prefWidth="300" -->
+        <TableView fx:id="serviceTableView" prefHeight="191.0" prefWidth="485.0" VBox.vgrow="ALWAYS" /> <!-->visible="false" -->
+    </HBox>
+
+    <!-- Liste des services -->
+    <!--Label text="Services Disponibles:"/>
+    <ListView fx:id="serviceListView" prefHeight="200" prefWidth="300" -->
+
+
+</VBox>

@@ -61,6 +61,11 @@ public class ServiceUser implements IService<User> {
     }
 
     @Override
+    public void supprimer(int idService) throws SQLException {
+
+    }
+
+    @Override
     public User getById(int id) throws SQLException {
         String query = "SELECT * FROM `user` WHERE id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
