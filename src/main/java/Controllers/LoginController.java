@@ -66,6 +66,8 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         Parent root = loader.load();
         txtUsername.getScene().setRoot(root);
+        ClientController dc = loader.getController();
+        dc.setLblClientName(txtUsername.getText());
     }
 
     private boolean validerChamps() {
