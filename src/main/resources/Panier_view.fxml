@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="Controllers.PanierController"
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background-color: #f0f8ff;">
+
+    <children>
+        <!-- Titre -->
+        <Label text="Mon Panier"
+               layoutX="20" layoutY="20"
+               style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2a2a2a;" />
+
+        <!-- Table des produits -->
+        <TableView fx:id="tablePanier"
+                   layoutX="20" layoutY="70"
+                   prefHeight="400" prefWidth="760">
+            <columns>
+                <TableColumn fx:id="colNomProduit" text="Nom du Produit" prefWidth="200" />
+                <TableColumn fx:id="colPrix" text="Prix" prefWidth="100" />
+                <TableColumn fx:id="colQuantite" text="Quantité" prefWidth="100" />
+                <TableColumn fx:id="colTotal" text="Total" prefWidth="150" />
+            </columns>
+        </TableView>
+
+        <!-- Boutons -->
+        <HBox spacing="10" layoutX="20" layoutY="500">
+            <Button text="Vider le Panier"
+                    onAction="#handleViderPanier"
+                    style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-font-size: 14px;" />
+            <Button text="Supprimer Produit Sélectionné"
+                    onAction="#handleSupprimerProduit"
+                    style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-font-size: 14px;" />
+            <Button text="Commander"
+                    onAction="#handlePasserCommande"
+                    style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-size: 14px;" />
+        </HBox>
+    </children>
+</AnchorPane>

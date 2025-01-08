@@ -1,6 +1,7 @@
 package Controllers;
 
 import Service.ServiceLogin;
+import Service.ServiceUser;
 import entités.Role;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +23,7 @@ public class LoginController {
     private PasswordField txtPassword;
 
     private ServiceLogin serviceLogin = new ServiceLogin();
-
+    private ServiceUser serviceUser= new ServiceUser();
     @FXML
     void Connecter(ActionEvent event) {
         if (!validerChamps()) {
@@ -93,5 +94,8 @@ public class LoginController {
         } else {
             afficherAlerte("Erreur", "Rôle inconnu. Impossible de rediriger.", Alert.AlertType.ERROR);
         }
+    }
+    public int getIdByUserName() throws SQLException {
+        return serviceUser.getIdByUserName(txtUsername.getText());
     }
 }

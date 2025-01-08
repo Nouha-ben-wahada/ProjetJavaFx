@@ -28,11 +28,7 @@ public class ClientController {
     }
     @FXML
     public void handleGererPanier(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/GererPanier.fxml");
-    }
-    @FXML
-    public void handlePasserCommande(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/PasserCommande.fxml");
+        ouvrirFenetre("/Panier_view.fxml");
     }
     @FXML
     public void handleConsulterCommandes(ActionEvent event) throws IOException {

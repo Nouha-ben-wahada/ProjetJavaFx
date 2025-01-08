@@ -106,4 +106,14 @@ public class ServiceUser implements IService<User> {
         }
         return users;
     }
+    public int getIdByUserName(String userName) throws SQLException {
+        String query = "SELECT id FROM `user` WHERE user_name = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, userName);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt("id");
+        }
+        return -1; // Retourne -1 si aucun utilisateur n'a été trouvé
+    }
 }
