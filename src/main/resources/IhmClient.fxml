@@ -1,47 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controllers.ClientController"
-            prefHeight="600.0" prefWidth="800.0"
-            style="-fx-background-color: #f0f8ff;">
+<AnchorPane prefHeight="600.0" prefWidth="716.0" style="-fx-background-color: linear-gradient(to bottom, #f0f8ff, #ffffff);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ClientController">
 
     <children>
-        <VBox spacing="20" alignment="CENTER" layoutX="200.0" layoutY="50.0">
-            <Label text="Espace Client" style="-fx-font-size: 24px; -fx-text-fill: #2a2a2a;" />
+        <!-- Barre supérieure -->
+        <HBox alignment="CENTER_RIGHT" layoutX="0" layoutY="0" prefHeight="50.0" prefWidth="800.0" spacing="20" style="-fx-background-color: #007BFF; -fx-padding: 10;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 14px; -fx-font-family: 'Arial';" text="Bienvenue," />
+            <Label fx:id="lblClientName" style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" />
+        </HBox>
 
-            <Button text="Consulter Produits"
-                    prefWidth="300"
-                    onAction="#handleConsulterProduits"
-                    style="-fx-background-color: #007BFF; -fx-text-fill: white; -fx-font-size: 14px;" />
-
-            <Button text="Rechercher un Produit"
-                    prefWidth="300"
-                    onAction="#handleRechercherProduit"
-                    style="-fx-background-color: #6C757D; -fx-text-fill: white; -fx-font-size: 14px;" />
-
-            <Button text="Gérer Panier"
-                    prefWidth="300"
-                    onAction="#handleGererPanier"
-                    style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-size: 14px;" />
-
-            <Button text="Passer une Commande"
-                    prefWidth="300"
-                    onAction="#handlePasserCommande"
-                    style="-fx-background-color: #17A2B8; -fx-text-fill: white; -fx-font-size: 14px;" />
-
-            <Button text="Consulter Commandes"
-                    prefWidth="300"
-                    onAction="#handleConsulterCommandes"
-                    style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-font-size: 14px;" />
-
-            <Button text="Se Déconnecter"
-                    prefWidth="300"
-                    onAction="#handleDeconnexion"
-                    style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-font-size: 14px;" />
+        <!-- En-tête -->
+        <VBox alignment="CENTER" layoutY="60.0" prefWidth="800.0" spacing="10">
+            <Label style="-fx-font-size: 28px; -fx-font-family: 'Arial Black'; -fx-text-fill: #333333;" text="Bienvenue dans l'Espace Client" />
+            <Label style="-fx-font-size: 18px; -fx-font-family: 'Arial'; -fx-text-fill: #555555;" text="Que souhaitez-vous faire aujourd'hui ?" />
         </VBox>
+
+        <!-- Contenu principal -->
+        <VBox alignment="CENTER" layoutX="200.0" layoutY="166.0" prefWidth="400.0" spacing="15">
+            <!-- Bouton Consulter Produits -->
+            <Button onAction="#handleConsulterProduits" prefWidth="350" style="-fx-background-color: #007BFF; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);" text="Consulter Produits" />
+
+            <!-- Bouton Rechercher un Produit -->
+            <Button onAction="#handleRechercherProduit" prefWidth="350" style="-fx-background-color: #6C757D; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);" text="Rechercher un Produit" />
+
+            <!-- Bouton Gérer Panier -->
+            <Button onAction="#handleGererPanier" prefWidth="350" style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);" text="Gérer Panier" />
+
+            <!-- Bouton Consulter Commandes -->
+            <Button onAction="#handleConsulterCommandes" prefWidth="350" style="-fx-background-color: #FFC107; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);" text="Consulter Commandes" />
+
+            <!-- Bouton Réserver un Service -->
+            <Button onAction="#handleReserverService" prefWidth="350" style="-fx-background-color: #8A2BE2; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);" text="Réserver un Service" />
+
+            <!-- Bouton Se Déconnecter -->
+            <Button onAction="#handleDeconnexion" prefWidth="350" style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-family: 'Arial'; -fx-border-radius: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);" text="Se Déconnecter" />
+        </VBox>
+
+        <!-- Pied de page -->
+        <Label alignment="CENTER" layoutX="0.0" layoutY="570.0" prefWidth="800.0" style="-fx-font-size: 12px; -fx-font-family: 'Arial'; -fx-text-fill: #888888;" text="© 2025 - Boutique en ligne" />
     </children>
 </AnchorPane>
