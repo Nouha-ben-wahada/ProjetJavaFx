@@ -1,0 +1,152 @@
+/* Général */
+* {
+    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+/* Titre */
+.label-titre {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 2, 2);
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+
+/* Boutons principaux */
+.button {
+    -fx-background-radius: 25;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-text-fill: white;
+    -fx-background-color: #3498db;
+    -fx-border-width: 0;
+    -fx-font-size: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 2, 2);
+    -fx-cursor: hand;
+}
+
+/* Effet au survol des boutons */
+.button:hover {
+    -fx-background-color: #2980b9; /* Changer la couleur du bouton au survol */
+    -fx-scale-x: 1.1;  /* Agrandir le bouton horizontalement */
+    -fx-scale-y: 1.1;  /* Agrandir le bouton verticalement */
+    -fx-border-width: 2px; /* Ajouter un contour au survol */
+    -fx-border-color: #2980b9; /* Changer la couleur du contour au survol */
+}
+
+/* Boutons spécifiques */
+.button-ajouter {
+    -fx-background-color: #4CAF50;
+}
+
+.button-ajouter:hover {
+    -fx-background-color: #45a049;
+}
+
+.button-supprimer {
+    -fx-background-color: #FF5722;
+}
+
+.button-supprimer:hover {
+    -fx-background-color: #e64a19;
+}
+
+.button-mettre-a-jour {
+    -fx-background-color: #FFC107;
+}
+
+.button-mettre-a-jour:hover {
+    -fx-background-color: #f39c12;
+}
+
+.button-rechercher {
+    -fx-background-color: #2196F3;
+}
+
+.button-rechercher:hover {
+    -fx-background-color: #1e88e5;
+}
+
+.button-annuler {
+    -fx-background-color: #B0BEC5;
+    -fx-text-fill: white;
+}
+
+.button-annuler:hover {
+    -fx-background-color: #90a4ae;
+}
+
+/* Panels */
+.vbox {
+    -fx-spacing: 15;
+    -fx-padding: 20px;
+}
+
+.hbox {
+    -fx-spacing: 10;
+}
+
+.vbox label, .hbox label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #34495e;
+    -fx-font-weight: bold;
+}
+
+/* Input Fields */
+.text-field {
+    -fx-background-color: #ECF0F1;
+    -fx-border-color: #BDC3C7;
+    -fx-border-radius: 5;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+}
+
+.text-field:focused {
+    -fx-border-color: #3498db;
+    -fx-background-color: white;
+}
+
+/* Combobox */
+.combo-box {
+    -fx-background-color: #ECF0F1;
+    -fx-border-color: #BDC3C7;
+    -fx-border-radius: 5;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+}
+
+.combo-box:focused {
+    -fx-border-color: #3498db;
+    -fx-background-color: white;
+}
+
+/* Section masquée */
+.vbox[visible=false] {
+    -fx-opacity: 0;
+    -fx-transition: opacity 0.3s;
+}
+
+.vbox[visible=true] {
+    -fx-opacity: 1;
+}
+
+/* AnchorPane */
+.anchor-pane {
+    -fx-background-image: url('/image/integrated.png');
+    -fx-background-position: bottom left;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 180px 180px;
+}
+
+/* Animation de l'apparition de sections */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

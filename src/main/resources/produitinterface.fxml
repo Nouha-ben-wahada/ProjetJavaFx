@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
+<?import javafx.collections.FXCollections?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<AnchorPane prefHeight="600.0" prefWidth="800.0"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Controllers.ProduitMenuController"
+            stylesheets="@style1.css">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <children>
+        <!-- Titre centré -->
+        <Label fx:id="labelTitre" layoutX="200.0" layoutY="20.0"
+               prefHeight="50.0" prefWidth="600.0"
+               text="Gestion des Produits"
+               styleClass="label-titre" />
+
+        <!-- Barre de Boutons à gauche avec taille similaire -->
+        <VBox layoutX="50.0" layoutY="100.0" spacing="20" alignment="CENTER">
+            <Button text="Ajouter" onAction="#afficherAjouter" styleClass="button-ajouter" prefWidth="150"/>
+            <Button text="Supprimer" onAction="#afficherSupprimer" styleClass="button-supprimer" prefWidth="150"/>
+            <Button text="Mettre à jour" onAction="#afficherMettreAJour" styleClass="button-mettre-a-jour" prefWidth="150"/>
+            <Button text="Rechercher" onAction="#afficherRechercher" styleClass="button-rechercher" prefWidth="150"/>
+        </VBox>
+
+        <!-- Section Ajouter Produit -->
+        <VBox fx:id="addProduit" spacing="10" layoutX="250.0" layoutY="100.0" alignment="TOP_LEFT" visible="false" prefWidth="400.0">
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Nom du Produit"/>
+                <TextField fx:id="txtNomAdd" promptText="Nom Produit" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Description"/>
+                <TextField fx:id="txtDescriptionAdd" promptText="Description" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Prix"/>
+                <TextField fx:id="txtPrixAdd" promptText="Prix" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Stock"/>
+                <TextField fx:id="txtStockAdd" promptText="Stock" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Catégorie"/>
+                <ComboBox fx:id="cmbCategorie" promptText="Choisir Catégorie" prefWidth="200" styleClass="combo-box">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Homme"/>
+                            <String fx:value="Femme"/>
+                            <String fx:value="Enfant"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Sous-Catégorie"/>
+                <ComboBox fx:id="cmbSousCategorieAdd" promptText="Choisir Sous-Catégorie" prefWidth="200" onAction="#updateFieldsBySousCategorie" styleClass="combo-box">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Vêtement"/>
+                            <String fx:value="Accessoire"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </HBox>
+
+            <!-- Champs spécifiques pour les produits -->
+            <VBox fx:id="vboxVetementFields" spacing="10" visible="false" managed="false">
+                <HBox spacing="10" alignment="TOP_RIGHT">
+                    <Label text="Taille"/>
+                    <ComboBox fx:id="cmbTailleAdd" promptText="Choisir Taille" prefWidth="200" styleClass="combo-box">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="XS"/>
+                                <String fx:value="S"/>
+                                <String fx:value="M"/>
+                                <String fx:value="L"/>
+                                <String fx:value="XL"/>
+                                <String fx:value="XXL"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </HBox>
+                <HBox spacing="10" alignment="TOP_RIGHT">
+                    <Label text="Couleur"/>
+                    <TextField fx:id="txtCouleurAdd" promptText="Couleur" prefWidth="200" styleClass="text-field"/>
+                </HBox>
+            </VBox>
+            <VBox fx:id="vboxAccessoireFields" spacing="10" visible="false" managed="false">
+                <HBox spacing="10" alignment="TOP_RIGHT">
+                    <Label text="Couleur"/>
+                    <TextField fx:id="txtCouleurAddAccessoire" promptText="Couleur" prefWidth="200" styleClass="text-field"/>
+                </HBox>
+                <HBox spacing="10" alignment="TOP_RIGHT">
+                    <Label text="Matière"/>
+                    <TextField fx:id="txtMatiereAdd" promptText="Matière" prefWidth="200" styleClass="text-field"/>
+                </HBox>
+            </VBox>
+
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Identifiant"/>
+                <TextField fx:id="txtIdAdd" promptText="Identifiant" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+
+            <!-- Bouton de validation pour l'ajout -->
+            <Button text="Valider Ajout" onAction="#ajouterProduit" styleClass="button-ajouter" prefWidth="200"/>
+        </VBox>
+
+        <!-- Section Supprimer Produit -->
+        <VBox fx:id="deleteProduit" spacing="10" layoutX="250.0" layoutY="100.0" alignment="TOP_LEFT" visible="false" prefWidth="400.0">
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="ID Produit à supprimer"/>
+                <TextField fx:id="txtIdDelete" promptText="ID" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+
+            <!-- Bouton de validation pour la suppression -->
+            <Button text="Valider Suppression" onAction="#supprimerProduit" styleClass="button-supprimer" prefWidth="200"/>
+        </VBox>
+
+        <!-- Section Mettre à jour Produit -->
+        <VBox fx:id="updateProduit" spacing="10" layoutX="250.0" layoutY="100.0" alignment="TOP_LEFT" visible="false" prefWidth="400.0">
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="ID du Produit"/>
+                <TextField fx:id="txtIdUpdate" promptText="ID Produit" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Nom du Produit"/>
+                <TextField fx:id="txtNomUpdate" promptText="Nom Produit" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Description"/>
+                <TextField fx:id="txtDescriptionUpdate" promptText="Description" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Prix"/>
+                <TextField fx:id="txtPrixUpdate" promptText="Prix" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Stock"/>
+                <TextField fx:id="txtStockUpdate" promptText="Stock" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Catégorie"/>
+                <TextField fx:id="txtCategorieUpdate" promptText="Catégorie" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Sous-Catégorie"/>
+                <TextField fx:id="txtSousCategorieUpdate" promptText="Sous-Catégorie" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+
+            <!-- Bouton de validation pour la mise à jour -->
+            <Button text="Valider Mise à jour" onAction="#mettreAJourProduit" styleClass="button-mettre-a-jour" prefWidth="200"/>
+        </VBox>
+
+        <!-- Section Recherche Produit -->
+        <VBox fx:id="searchProduit" spacing="10" layoutX="250.0" layoutY="100.0" alignment="TOP_LEFT" visible="false" prefWidth="400.0">
+            <HBox spacing="10" alignment="TOP_RIGHT">
+                <Label text="Nom Produit"/>
+                <TextField fx:id="txtNomSearch" promptText="Nom Produit" prefWidth="200" styleClass="text-field"/>
+            </HBox>
+
+            <!-- Bouton de validation pour la recherche -->
+            <Button text="Valider Recherche" onAction="#rechercherProduit" styleClass="button-rechercher" prefWidth="200"/>
+        </VBox>
+
+        <!-- Bouton Annuler -->
+        <Button text="Annuler" onAction="#annuler" layoutX="700.0" layoutY="550.0" styleClass="button-annuler" prefWidth="100"/>
+    </children>
+</AnchorPane>

@@ -1,109 +1,146 @@
 package Service;
-import entités.User;
-import ConnectionDB.DataBaseConnection;
-import entités.Role;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ServiceUser implements IService<User> {
-    private Connection connection = DataBaseConnection.getInstance().getConnection();
-    private Statement ste;
+import ConnectionDB.DataBaseConnection;
+import entités.Produit;
+import entités.Vetements;
+import entités.Accessoires;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class ServiceUser {
+    private Connection connection;
 
     public ServiceUser() {
-        try {
-            ste = connection.createStatement();
+        this.connection = DataBaseConnection.getInstance().getConnection();
+    }
+
+    // Recherche générale dans la table `produit`
+    public ObservableList<Produit> getProduitsFiltrés(String categorie, String sousCategorie, String nomProduit) {
+        ObservableList<Produit> produits = FXCollections.observableArrayList();
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM produit WHERE 1=1");
+
+        if (categorie != null && !categorie.isEmpty()) queryBuilder.append(" AND LOWER(categorie) = LOWER(?)");
+        if (sousCategorie != null && !sousCategorie.isEmpty()) queryBuilder.append(" AND LOWER(sousCategorie) = LOWER(?)");
+        if (nomProduit != null && !nomProduit.isEmpty()) queryBuilder.append(" AND LOWER(nom) LIKE LOWER(?)");
+
+        try (PreparedStatement pstmt = connection.prepareStatement(queryBuilder.toString())) {
+            int index = 1;
+            if (categorie != null && !categorie.isEmpty()) pstmt.setString(index++, categorie.toLowerCase());
+            if (sousCategorie != null && !sousCategorie.isEmpty()) pstmt.setString(index++, sousCategorie.toLowerCase());
+            if (nomProduit != null && !nomProduit.isEmpty()) pstmt.setString(index, "%" + nomProduit.toLowerCase() + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) produits.add(createProduitFromResultSet(rs));
+
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
+            throw new RuntimeException("Erreur lors de la recherche: " + e.getMessage());
         }
+
+        return produits;
     }
 
-    @Override
-    public void ajouter(User user) throws SQLException {
-        String query = "INSERT INTO `user` (id, nom, prenom, tel, email, adresse, user_name, password, date_creation_compte, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Recherche spécifique dans la table `vetements`
+    public ObservableList<Produit> getProduitsFromVetements(String categorie, String nomProduit) {
+        ObservableList<Produit> produits = FXCollections.observableArrayList();
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM vetements WHERE 1=1");
 
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, user.getId());
-        statement.setString(2, user.getNom());
-        statement.setString(3, user.getPrenom());
-        statement.setString(4, user.getTel());
-        statement.setString(5, user.getEmail());
-        statement.setString(6, user.getAdresse());
-        statement.setString(7, user.getUserName());
-        statement.setString(8, user.getPassword());
-        statement.setString(9, user.getDateCreationCompte().toString());
-        statement.setString(10, user.getRole().name());
-        statement.executeUpdate();
+        if (categorie != null && !categorie.isEmpty()) queryBuilder.append(" AND LOWER(categorie) = LOWER(?)");
+        if (nomProduit != null && !nomProduit.isEmpty()) queryBuilder.append(" AND LOWER(nom) LIKE LOWER(?)");
+
+        try (PreparedStatement pstmt = connection.prepareStatement(queryBuilder.toString())) {
+            int index = 1;
+            if (categorie != null && !categorie.isEmpty()) pstmt.setString(index++, categorie.toLowerCase());
+            if (nomProduit != null && !nomProduit.isEmpty()) pstmt.setString(index, "%" + nomProduit.toLowerCase() + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                produits.add(new Vetements(
+                        rs.getString("reference"),
+                        rs.getString("nom"),
+                        rs.getString("description"),
+                        rs.getDouble("prix"),
+                        rs.getInt("stock"),
+                        rs.getString("categorie"),
+                        "Vêtement",
+                        rs.getString("taille"),
+                        rs.getString("couleur")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erreur lors de la recherche dans vetements: " + e.getMessage());
+        }
+
+        return produits;
     }
 
-    @Override
-    public void supprimer(User user) throws SQLException {
-        String query = "DELETE FROM `user` WHERE id = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, user.getId());
-        statement.executeUpdate();
+    // Recherche spécifique dans la table `accessoires`
+    public ObservableList<Produit> getProduitsFromAccessoires(String categorie, String nomProduit) {
+        ObservableList<Produit> produits = FXCollections.observableArrayList();
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM accessoires WHERE 1=1");
+
+        if (categorie != null && !categorie.isEmpty()) queryBuilder.append(" AND LOWER(categorie) = LOWER(?)");
+        if (nomProduit != null && !nomProduit.isEmpty()) queryBuilder.append(" AND LOWER(nom) LIKE LOWER(?)");
+
+        try (PreparedStatement pstmt = connection.prepareStatement(queryBuilder.toString())) {
+            int index = 1;
+            if (categorie != null && !categorie.isEmpty()) pstmt.setString(index++, categorie.toLowerCase());
+            if (nomProduit != null && !nomProduit.isEmpty()) pstmt.setString(index, "%" + nomProduit.toLowerCase() + "%");
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                produits.add(new Accessoires(
+                        rs.getString("reference"),
+                        rs.getString("nom"),
+                        rs.getString("description"),
+                        rs.getDouble("prix"),
+                        rs.getInt("stock"),
+                        rs.getString("categorie"),
+                        "Accessoire",
+                        rs.getString("couleur"),
+                        rs.getString("matiere")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erreur lors de la recherche dans accessoires: " + e.getMessage());
+        }
+
+        return produits;
     }
 
-    @Override
-    public void update(User t) throws SQLException {
-        String query = "UPDATE `user` SET nom = ?, prenom = ?, email = ?, adresse = ?, tel = ?, user_name = ?, password = ?, role = ? WHERE id = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setString(1, t.getNom());
-        statement.setString(2, t.getPrenom());
-        statement.setString(3, t.getEmail());
-        statement.setString(4, t.getAdresse());
-        statement.setString(5, t.getTel());
-        statement.setString(6, t.getUserName());
-        statement.setString(7, t.getPassword());
-        statement.setString(8, t.getRole().name());
-        statement.setInt(9, t.getId());
-        statement.executeUpdate();
-    }
-
-    @Override
-    public void supprimer(int idService) throws SQLException {
-
-    }
-
-    @Override
-    public User getById(int id) throws SQLException {
-        String query = "SELECT * FROM `user` WHERE id = ?";
-        PreparedStatement statement = connection.prepareStatement(query);
-        statement.setInt(1, id);
-        ResultSet resultSet = statement.executeQuery();
-        if (resultSet.next()) {
-            return new User(
-                    resultSet.getString("nom"),
-                    resultSet.getString("prenom"),
-                    resultSet.getString("tel"),
-                    resultSet.getString("email"),
-                    resultSet.getString("adresse"),
-                    resultSet.getString("user_name"),
-                    resultSet.getString("password"),
-                    Role.valueOf(resultSet.getString("role")) // Assuming Role is inside User
+    // Méthode pour créer un objet Produit depuis un ResultSet
+    private Produit createProduitFromResultSet(ResultSet rs) throws SQLException {
+        String sousCategorie = rs.getString("sousCategorie");
+        if ("vêtement".equalsIgnoreCase(sousCategorie)) {
+            return new Vetements(
+                    rs.getString("reference"),
+                    rs.getString("nom"),
+                    rs.getString("description"),
+                    rs.getDouble("prix"),
+                    rs.getInt("stock"),
+                    rs.getString("categorie"),
+                    sousCategorie,
+                    rs.getString("taille"),
+                    rs.getString("couleur")
+            );
+        } else {
+            return new Accessoires(
+                    rs.getString("reference"),
+                    rs.getString("nom"),
+                    rs.getString("description"),
+                    rs.getDouble("prix"),
+                    rs.getInt("stock"),
+                    rs.getString("categorie"),
+                    sousCategorie,
+                    rs.getString("couleur"),
+                    rs.getString("matiere")
             );
         }
-        return null;
-    }
-
-    @Override
-    public List<User> getAll() throws SQLException {
-        List<User> users = new ArrayList<>();
-        String query = "SELECT * FROM `user`";
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
-        while (resultSet.next()) {
-            users.add(new User(
-                    resultSet.getString("nom"),
-                    resultSet.getString("prenom"),
-                    resultSet.getString("tel"),
-                    resultSet.getString("email"),
-                    resultSet.getString("adresse"),
-                    resultSet.getString("user_name"),
-                    resultSet.getString("password"),
-                    Role.valueOf(resultSet.getString("role")) // Assuming Role is inside User
-            ));
-        }
-        return users;
     }
 }
