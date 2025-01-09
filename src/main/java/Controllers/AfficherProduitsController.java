@@ -1,83 +1,84 @@
 package Controllers;
 
-import javafx.event.ActionEvent;
+import Service.ServiceProduit;
+import entités.Produit;
+import entités.Vetements;
+import entités.Accessoires;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
+import java.sql.SQLException;
 
 public class AfficherProduitsController {
 
     @FXML
-    private ImageView imageProduit1;
-    @FXML
-    private ImageView imageProduit2;
-    @FXML
-    private ImageView imageProduit3;
+    private TableView<Produit> tableProduits;
 
     @FXML
-    private Label labelProduit1;
-    @FXML
-    private Label labelProduit2;
-    @FXML
-    private Label labelProduit3;
+    private TableColumn<Produit, String> colReference;
 
     @FXML
-    private Button btnCreer;
-
-//    public void initialize() {
-//        // Charger les images des produits
-//        imageProduit1.setImage(new Image(getClass().getResource("/Images/AppleWatchserieS6.jpg").toExternalForm()));  // Chemin relatif vers ressources
-//        imageProduit2.setImage(new Image(getClass().getResource("/Images/BrownTissot.jpg").toExternalForm()));
-//        imageProduit3.setImage(new Image(getClass().getResource("/Images/FossilClassic.jpg").toExternalForm()));
-//
-//        // Définir les titres des produits
-//        labelProduit1.setText("Apple Watch Serie 6");
-//        labelProduit2.setText("Montre Tissot Brown");
-//        labelProduit3.setText("Montre Fossil Classic");
-//    }
+    private TableColumn<Produit, String> colNom;
 
     @FXML
-    private void voirDetails1() {
-        System.out.println("Détails de la Apple Watch Serie 6");
-        // Ajouter le code pour afficher les détails du produit 1, par exemple ouvrir une nouvelle scène.
+    private TableColumn<Produit, String> colDescription;
+
+    @FXML
+    private TableColumn<Produit, Double> colPrix;
+
+    @FXML
+    private TableColumn<Produit, Integer> colStock;
+
+    @FXML
+    private TableColumn<Produit, String> colCategorie;
+
+    @FXML
+    private TableColumn<Produit, String> colSousCategorie;
+
+    @FXML
+    private TableColumn<Produit, String> colTaille; // Spécifique aux vêtements
+
+    @FXML
+    private TableColumn<Produit, String> colCouleur;
+
+    @FXML
+    private TableColumn<Produit, String> colMatiere; // Spécifique aux accessoires
+
+    private ServiceProduit serviceProduit;
+
+    private ObservableList<Produit> produitsList;
+
+    public AfficherProduitsController() {
+        serviceProduit = new ServiceProduit(); // Instance du service
+        produitsList = FXCollections.observableArrayList();
     }
 
     @FXML
-    private void voirDetails2() {
-        System.out.println("Détails de la Montre Tissot Brown");
-        // Ajouter le code pour afficher les détails du produit 2
-    }
+    public void initialize() {
+        // Associer les colonnes aux attributs de Produit
+        colReference.setCellValueFactory(new PropertyValueFactory<>("reference"));
+        colNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colPrix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        colStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        colCategorie.setCellValueFactory(new PropertyValueFactory<>("categorie"));
+        colSousCategorie.setCellValueFactory(new PropertyValueFactory<>("sousCategorie"));
+        colTaille.setCellValueFactory(new PropertyValueFactory<>("taille"));
+        colCouleur.setCellValueFactory(new PropertyValueFactory<>("couleur"));
+        colMatiere.setCellValueFactory(new PropertyValueFactory<>("matiere"));
 
-    @FXML
-    private void voirDetails3() {
-        System.out.println("Détails de la Montre Fossil Classic");
-        // Ajouter le code pour afficher les détails du produit 3
-    }
-
-    private void switchScene(String fxmlFile) throws IOException {
+        // Charger les produits depuis la base de données
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            btnCreer.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Afficher un message d'erreur à l'utilisateur
+            produitsList.addAll(serviceProduit.getAll());
+        } catch (SQLException e) {
+            System.out.println("Erreur lors du chargement des produits : " + e.getMessage());
         }
+
+        tableProduits.setItems(produitsList);
     }
 
-    @FXML
-    void CreerCompte(ActionEvent event) throws IOException {
-        switchScene("/CreateCompte.fxml");
-    }
 
-    @FXML
-    void Se_connecter(ActionEvent event) throws IOException {
-        switchScene("/LoginPage.fxml");
-    }
 }

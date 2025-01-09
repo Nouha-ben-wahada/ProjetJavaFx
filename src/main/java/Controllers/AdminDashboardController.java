@@ -17,7 +17,7 @@ public class AdminDashboardController {
 
     @FXML
     void handleGestionCommandes(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/GestionCommandes.fxml");
+        ouvrirFenetre("/CommandeInterface.fxml");
     }
 
     @FXML
@@ -27,7 +27,7 @@ public class AdminDashboardController {
 
     @FXML
     void handleGestionReclamations(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/GestionReclamations.fxml");
+        ouvrirFenetre("/AdminRecPage.fxml");
     }
 
     private void ouvrirFenetre(String fichierFXML) throws IOException {
@@ -36,5 +36,9 @@ public class AdminDashboardController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void handleDeconnexion(ActionEvent actionEvent) throws IOException {
+        ouvrirFenetre("/LoginPage.fxml");
     }
 }

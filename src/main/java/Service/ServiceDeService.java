@@ -47,11 +47,6 @@ public class ServiceDeService implements IService<Service> {
     }
 
     @Override
-    public void upadte(Reservation22 reservation22) {
-
-    }
-
-    @Override
     public void supprimer(int idService) throws SQLException {
         String query = "DELETE FROM service WHERE idService = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {

@@ -20,15 +20,15 @@ public class ClientController {
 
     @FXML
     public void handleConsulterProduits(ActionEvent event) throws IOException {
-        ouvrirFenetre("/.....fxml");
+        ouvrirFenetre("/AfficherProduits.fxml");
     }
     @FXML
     public void handleRechercherProduit(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/userinterface.fxml");
+        ouvrirFenetre("/userinterface.fxml");
     }
     @FXML
-    public void handleGererPanier(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Panier_view.fxml");
+    void handleReclamer(ActionEvent event) throws IOException {
+        ouvrirFenetre("/ReclamationPage.fxml");
     }
     @FXML
     public void handleConsulterCommandes(ActionEvent event) throws IOException {
@@ -41,7 +41,7 @@ public class ClientController {
 
     @FXML
     void handleReserverService(ActionEvent event) throws IOException {
-        ouvrirFenetre("/service_view.fxml"); // Assurez-vous d'avoir un fichier FXML pour la réservation
+        ouvrirFenetre("/ResCltView.fxml"); // Assurez-vous d'avoir un fichier FXML pour la réservation
     }
     private void ouvrirFenetre(String fichierFXML) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fichierFXML));
