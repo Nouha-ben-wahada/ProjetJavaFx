@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="900.0" spacing="20.0" xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminReclamationController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+    </padding>
+
+    <!-- Title -->
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;"
+           text="Admin - Gestion des Réclamations" textFill="#045bf2" />
+
+    <!-- Reclamation Table -->
+    <TableView fx:id="reclamationTable" prefHeight="400.0" prefWidth="800.0">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50.0" />
+            <TableColumn fx:id="emailColumn" text="E-mail Client" prefWidth="150.0" />
+            <TableColumn fx:id="commandeIdColumn" text="ID Commande" prefWidth="100.0" />
+            <TableColumn fx:id="produitColumn" text="Ref Produit" prefWidth="100.0" />
+            <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="250.0" />
+            <TableColumn fx:id="dateColumn" text="Date Réclamation" prefWidth="150.0" />
+        </columns>
+    </TableView>
+
+    <!-- Admin Response Section -->
+    <VBox spacing="8" prefWidth="800.0">
+        <Label text="Réponse à la Réclamation:" />
+        <TextArea fx:id="responseField"
+                  promptText="Écrivez votre réponse ici..."
+                  prefHeight="100.0" />
+    </VBox>
+
+    <!-- Buttons -->
+    <HBox alignment="CENTER" spacing="10">
+        <Button onAction="#handleSendResponse"
+                style="-fx-background-color: lightblue;"
+                text="Envoyer Réponse" />
+    </HBox>
+</VBox>
