@@ -1,4 +1,5 @@
 package Service;
+import entités.Reservation22;
 import entités.User;
 import ConnectionDB.DataBaseConnection;
 import entités.Role;
@@ -42,6 +43,11 @@ public class ServiceUser implements IService<User> {
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, user.getId());
         statement.executeUpdate();
+    }
+
+    @Override
+    public void upadte(Reservation22 reservation22) {
+
     }
 
     @Override

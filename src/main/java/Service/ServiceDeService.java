@@ -1,6 +1,7 @@
 package Service;
 
 import ConnectionDB.DataBaseConnection;
+import entités.Reservation22;
 import entités.Service;
 
 import java.sql.*;
@@ -42,6 +43,11 @@ public class ServiceDeService implements IService<Service> {
 
     @Override
     public void supprimer(Service service) throws SQLException {
+
+    }
+
+    @Override
+    public void upadte(Reservation22 reservation22) {
 
     }
 

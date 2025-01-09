@@ -1,5 +1,6 @@
 package Service;
 
+import entités.Reservation22;
 import entités.User;
 
 import java.sql.SQLException;
@@ -8,6 +9,9 @@ public interface IService <T>{
 
     void ajouter(T t) throws SQLException;
     void supprimer(T t) throws SQLException;
+
+    void upadte(Reservation22 reservation22);
+
     void update(T t) throws SQLException;
 
     void supprimer(int idService) throws SQLException;
