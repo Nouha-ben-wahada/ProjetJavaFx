@@ -12,7 +12,7 @@ public class AdminDashboardController {
 
     @FXML
     void handleGestionProduits(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/GestionProduits.fxml");
+        ouvrirFenetre("/produitinterface.fxml");
     }
 
     @FXML

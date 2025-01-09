@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="670.0" prefWidth="536.0" style="-fx-background-color: #dcdcdc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ResCltController">
+   <children>
+      <AnchorPane layoutX="-2.0" layoutY="-1.0" prefHeight="644.0" prefWidth="552.0">
+         <children>
+            <ImageView fitHeight="608.0" fitWidth="536.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/beauty1.jpg" />
+               </image>
+            </ImageView>
+            <Label alignment="TOP_LEFT" layoutX="151.0" layoutY="375.0" text="Entrez vos données : " textFill="NAVY">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
+         
+                <HBox layoutX="166.0" layoutY="401.0" prefHeight="192.0" prefWidth="203.0" spacing="20">
+               <children>
+                    <!-- Formulaire de réservation -->
+                    <VBox alignment="BASELINE_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="194.0" prefWidth="193.0" spacing="10">
+               
+                                                   <!--TextField fx:id="clientIdField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="ID Client" -->
+                        <!--TextField fx:id="clientPrenameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Prénom" -->
+                        <TextField fx:id="clientNameField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="UserName" />
+                        <TextField fx:id="clientEmailField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Email" />
+                        <DatePicker fx:id="reservationDatePicker" />
+                        <TextField fx:id="clientPhoneField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" promptText="Téléphone" />
+                        <ComboBox fx:id="reservationTimeComboBox" promptText="Sélectionnez l'heure" style="-fx-background-color: white; -fx-border-color: grey;" />
+                    </VBox>
+               </children>
+             </HBox>
+            <Button fx:id="addReservationButton1" layoutX="171.0" layoutY="595.0" onAction="#onAddReservation" style="-fx-background-color: #ff6347; -fx-text-fill: white;" text="Confirmer Réservation" textOverrun="WORD_ELLIPSIS" />
+         </children>
+      </AnchorPane>
+      <VBox alignment="TOP_CENTER" spacing="10">
+      
+          <Label alignment="BOTTOM_CENTER" prefHeight="58.0" prefWidth="534.0" style="-fx-font-size: 20px; -fx-text-fill: #2a9df4; -fx-background-color: #000080;" text="Réservez votre Service" textAlignment="CENTER" textFill="WHITE">
+            <graphic>
+               <ImageView fitHeight="57.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" style="-fx-translate-x: -135;">
+                  <image>
+                     <Image url="@Images/icon.png" />
+                  </image>
+                  <effect>
+                     <ColorAdjust contrast="0.19" saturation="0.04" />
+                  </effect>
+               </ImageView>
+            </graphic>
+         </Label>
+      
+          <!-- Liste des réservations -->
+          <!--VBox fx:id="ReservationVBox" alignment="TOP_LEFT" prefHeight="73.0" prefWidth="466.0" spacing="10" style="-fx-border-color: #d3d3d3; -fx-padding: 10;">
+              <Label style="-fx-font-size: 16px;" text="Réservations" -->
+              <!-- Les réservations seront ajoutées dynamiquement -->
+          <!--/VBox-->
+      </VBox>
+         <Label fx:id="feedbackLabel" layoutX="127.0" layoutY="623.0" prefHeight="39.0" prefWidth="221.0" text="" wrapText="true" />
+      <Label fx:id="feedbackLabel1" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="0.0" text="" wrapText="true" />
+      <ImageView fitHeight="126.0" fitWidth="230.0" layoutX="425.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/f2.gif" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="-0.12" saturation="-0.04" />
+         </effect>
+      </ImageView>
+   
+                <!-- Liste des services disponibles -->
+       <VBox fx:id="servicesVBox" alignment="TOP_LEFT" layoutX="10.0" layoutY="65.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="258.0" prefWidth="490.0" spacing="10" style="-fx-border-color: #ffff9e; -fx-padding: 10; -fx-background-color: #dcdcdc; -fx-border-width: 7;">
+           <Label style="-fx-font-size: 16px;" text="Services Disponibles :" textFill="NAVY">
+            <font>
+               <Font name="System Bold Italic" size="12.0" />
+            </font>
+         </Label>
+         <effect>
+            <InnerShadow choke="0.25" height="53.75" radius="30.47" width="70.13">
+               <color>
+                  <Color red="0.47145548462867737" green="0.557894766330719" blue="0.03925925865769386" />
+               </color>
+            </InnerShadow>
+         </effect>
+           <!-- Les services seront ajoutés dynamiquement -->
+       </VBox>
+   </children>
+</Pane>

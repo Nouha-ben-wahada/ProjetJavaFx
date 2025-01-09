@@ -1,83 +1,110 @@
 package entités;
 
+import javafx.beans.property.*;
+
 public class Produit {
+    private StringProperty reference;
+    private StringProperty nom;
+    private StringProperty description;
+    private DoubleProperty prix;
+    private IntegerProperty stock;
+    private StringProperty categorie;
+    private StringProperty sousCategorie;
+    // Constructor for Produit class
+    public Produit(String reference, String nom, String description, double prix, int stock,
+                   String categorie, String sousCategorie) {
+        this.reference = new SimpleStringProperty(reference);
+        this.nom = new SimpleStringProperty(nom);
+        this.description = new SimpleStringProperty(description);
+        this.prix = new SimpleDoubleProperty(prix);
+        this.stock = new SimpleIntegerProperty(stock);
+        this.categorie = new SimpleStringProperty(categorie);
+        this.sousCategorie = new SimpleStringProperty(sousCategorie);
+    }
+    public Produit(){}
 
-    private int refProduit;
-    private String designation;
-    private String description;
-    private double prix;
-    private String image;
-    private int qteStocke;
-
-    public Produit() {
+    // Getters and setters for Produit class fields
+    public StringProperty referenceProperty() {
+        return reference;
     }
 
-    public Produit(int refProduit, String designation, String description, double prix, String image, int qteStocke) {
-        this.refProduit = refProduit;
-        this.designation = designation;
-        this.description = description;
-        this.prix = prix;
-        this.image = image;
-        this.qteStocke = qteStocke;
+    public String getReference() {
+        return reference.get();
     }
 
-    public int getQteStocke() {
-        return qteStocke;
+    public void setReference(String reference) {
+        this.reference.set(reference);
     }
 
-    public void setQteStocke(int qteStocke) {
-        this.qteStocke = qteStocke;
+    public StringProperty nomProperty() {
+        return nom;
     }
 
-    public String getImage() {
-        return image;
+    public String getNom() {
+        return nom.get();
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setNom(String nom) {
+        this.nom.set(nom);
     }
 
-    public double getPrix() {
-        return prix;
-    }
-
-    public void setPrix(double prix) {
-        this.prix = prix;
-    }
-
-    public String getDescription() {
+    public StringProperty descriptionProperty() {
         return description;
     }
 
+    public String getDescription() {
+        return description.get();
+    }
+
     public void setDescription(String description) {
-        this.description = description;
+        this.description.set(description);
     }
 
-    public String getDesignation() {
-        return designation;
+    public DoubleProperty prixProperty() {
+        return prix;
     }
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
+    public double getPrix() {
+        return prix.get();
     }
 
-    public int getRefProduit() {
-        return refProduit;
+    public void setPrix(double prix) {
+        this.prix.set(prix);
     }
 
-    public void setRefProduit(int refProduit) {
-        this.refProduit = refProduit;
+    public IntegerProperty stockProperty() {
+        return stock;
     }
 
-    @Override
-    public String toString() {
-        return "Produit{" +
-                "refProduit=" + refProduit +
-                ", designation='" + designation + '\'' +
-                ", description='" + description + '\'' +
-                ", prix=" + prix +
-                ", image='" + image + '\'' +
-                ", qteStocke=" + qteStocke +
-                '}';
+    public int getStock() {
+        return stock.get();
+    }
+
+    public void setStock(int stock) {
+        this.stock.set(stock);
+    }
+
+    public StringProperty categorieProperty() {
+        return categorie;
+    }
+
+    public String getCategorie() {
+        return categorie.get();
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie.set(categorie);
+    }
+
+    public StringProperty sousCategorieProperty() {
+        return sousCategorie;
+    }
+
+    public String getSousCategorie() {
+        return sousCategorie.get();
+    }
+
+    public void setSousCategorie(String sousCategorie) {
+        this.sousCategorie.set(sousCategorie);
     }
 }

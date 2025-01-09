@@ -20,11 +20,11 @@ public class ClientController {
 
     @FXML
     public void handleConsulterProduits(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/ConsulterProduits.fxml");
+        ouvrirFenetre("/.....fxml");
     }
     @FXML
     public void handleRechercherProduit(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/RechercherProduit.fxml");
+        ouvrirFenetre("/Views/userinterface.fxml");
     }
     @FXML
     public void handleGererPanier(ActionEvent event) throws IOException {
@@ -32,7 +32,7 @@ public class ClientController {
     }
     @FXML
     public void handleConsulterCommandes(ActionEvent event) throws IOException {
-        ouvrirFenetre("/Views/ConsulterCommandes.fxml");
+        ouvrirFenetre("/gestion_commande.fxml");
     }
     @FXML
     public void handleDeconnexion(ActionEvent event) throws IOException {

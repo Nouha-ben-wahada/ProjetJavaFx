@@ -1,0 +1,48 @@
+/* Fond global pour l'application */
+.anchor-pane {
+    -fx-background-color: #f4f4f9; /* Gris clair, donne un aspect propre et moderne */
+}
+
+/* Fond de la VBox contenant les composants */
+.vbox {
+    -fx-background-color:
+            #5d816f; /* Fond blanc pour la zone principale */
+    -fx-background-radius: 10px;  /* Coins arrondis pour la VBox */
+    -fx-padding: 20px; /* Ajout de padding pour espacer les éléments */
+}
+
+/* Fond de la TableView */
+.table-view {
+    -fx-background-color: #5d816f; /* Fond blanc pour la TableView */
+    -fx-border-color: #ddd; /* Bordure légère */
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+/* Style de la ligne sélectionnée dans la table */
+.table-view .table-row-cell:selected {
+    -fx-background-color: #d9e6f2; /* Fond bleu clair pour la ligne sélectionnée */
+}
+
+/* Style du bouton de recherche */
+.search-button {
+    -fx-background-color:
+            #5d816f; /* Bleu clair pour un look moderne */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+/* Hover effect sur le bouton */
+.search-button:hover {
+    -fx-background-color: #00b35d; /* Bleu plus foncé quand survolé */
+}
+
+/* Effect sur focus pour le bouton */
+.search-button:focused {
+    -fx-background-color: #00b35d;
+}

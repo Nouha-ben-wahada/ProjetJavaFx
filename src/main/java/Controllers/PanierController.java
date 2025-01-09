@@ -40,7 +40,7 @@ public class PanierController {
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
 
         // Ajout des données fictives pour tester
-         panier.add(new Produit(1,"Produit A","femme",20.0,"", 2));
+        // panier.add(new Produit(1,"Produit A","femme",20.0,"", 2));
 //        panier.add(new Produit("Produit B", 15.0, 1));
 //        panier.add(new Produit("Produit C", 30.0, 3));
 
